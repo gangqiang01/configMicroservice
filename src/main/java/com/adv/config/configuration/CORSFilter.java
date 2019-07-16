@@ -18,7 +18,7 @@ import java.io.IOException;
 @Slf4j
 public class CORSFilter implements Filter {
     public static final String SRPTOEKN = "X-Auth-SRPToken";
-    public static final String SRPNAME = "secrecyKey";
+    public static final String SRPNAME = "secrecyConfig";
     private static final String SEPARATOR = "#";
     private static final long TIMEOUT = 60*3;//３min
 
