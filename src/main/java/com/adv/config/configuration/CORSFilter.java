@@ -1,7 +1,7 @@
 package com.adv.config.configuration;
 
 import com.adv.config.former.Response;
-import com.adv.config.util.AES;
+import com.adv.config.util.AESUtil;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,16 +25,20 @@ public class CORSFilter implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 //        log.info("enter");
         HttpServletRequest request = (HttpServletRequest) req;
-        String srpToken = request.getHeader(SRPTOEKN);
         HttpServletResponse response = (HttpServletResponse) res;
 //        response.setHeader("Access-Control-Allow-Origin", "*");
 //        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
 //        response.setHeader("Access-Control-Max-Age", "3600");
 //        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, accesstoken, X-Auth-SRPToken,timeout");
-
-        if(srpToken != null && isSrpToken(srpToken)){
+        if(request.getRequestURI().equals("/getKeyPair")){
             chain.doFilter(req, res);
             return;
+        }else{
+            String srpToken = request.getHeader(SRPTOEKN);
+            if(srpToken != null && isSrpToken(srpToken)){
+                chain.doFilter(req, res);
+                return;
+            }
         }
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
@@ -44,7 +48,7 @@ public class CORSFilter implements Filter {
 
     private boolean isSrpToken(String srpToken){
         try{
-            String result = AES.Decrypt(srpToken);
+            String result = AESUtil.Decrypt(srpToken);
             log.info("result:"+result);
             long nowTime = System.currentTimeMillis()/1000;
             long otime = Long.valueOf(result.split(SEPARATOR)[0]).longValue();

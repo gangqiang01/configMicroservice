@@ -5,7 +5,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
-public class AES {
+public class AESUtil {
 	private static String sKey = "androidlink/astore%#$abc";
 
 	public static String Encrypt(String sSrc) throws Exception {
