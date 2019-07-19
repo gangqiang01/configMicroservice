@@ -4,6 +4,7 @@ import com.adv.config.former.Response;
 import com.adv.config.util.AESUtil;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
@@ -13,8 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-//@Component
-@WebFilter(filterName = "CORSFilter")
+//@WebFilter(filterName = "CORSFilter", urlPatterns = {"/creatQRCodeJson"})
 @Slf4j
 public class CORSFilter implements Filter {
     public static final String SRPTOEKN = "X-Auth-SRPToken";
@@ -30,15 +30,11 @@ public class CORSFilter implements Filter {
 //        response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");
 //        response.setHeader("Access-Control-Max-Age", "3600");
 //        response.setHeader("Access-Control-Allow-Headers", "x-requested-with, Content-Type, accesstoken, X-Auth-SRPToken,timeout");
-        if(request.getRequestURI().equals("/getKeyPair")){
+        log.info(request.getRequestURI());
+        String srpToken = request.getHeader(SRPTOEKN);
+        if(srpToken != null && isSrpToken(srpToken)){
             chain.doFilter(req, res);
             return;
-        }else{
-            String srpToken = request.getHeader(SRPTOEKN);
-            if(srpToken != null && isSrpToken(srpToken)){
-                chain.doFilter(req, res);
-                return;
-            }
         }
 
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
