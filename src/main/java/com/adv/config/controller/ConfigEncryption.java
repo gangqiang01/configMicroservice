@@ -4,6 +4,7 @@ import com.adv.config.entity.ConfigurationData;
 import com.adv.config.former.Response;
 import com.adv.config.util.RASUtil;
 
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -24,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(description = "Encryption of configuration information api")
 public class ConfigEncryption {
-
+    private String name = "WP.SRP";
     @ApiOperation(value="Encrypt configuration information" ,notes = "Encrypt related configuration information")
     @RequestMapping(value = "/creatQRCodeJson", method = RequestMethod.POST)
     public ResponseEntity<String> encrypt(@RequestBody ConfigurationData configData){
@@ -35,8 +36,12 @@ public class ConfigEncryption {
             return new ResponseEntity(Response.error("Data format error"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         String result = RASUtil.encrypt(configJson, publicKey);
+
+        JSONObject json = new JSONObject();
+        json.put("id", name);
+        json.put("data", result);
         if(result != null){
-            return new ResponseEntity(Response.success(result), HttpStatus.OK);
+            return new ResponseEntity(Response.success(json.toString()), HttpStatus.OK);
         }else{
             return new ResponseEntity(Response.error("Server error"), HttpStatus.INTERNAL_SERVER_ERROR);
         }

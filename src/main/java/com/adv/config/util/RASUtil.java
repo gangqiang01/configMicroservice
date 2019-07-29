@@ -2,6 +2,7 @@ package com.adv.config.util;
 
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
+//import org.apache.commons.net.util.Base64;
 import org.apache.tomcat.util.codec.binary.Base64;
 
 import javax.crypto.Cipher;
@@ -18,8 +19,8 @@ import java.security.spec.X509EncodedKeySpec;
  */
 @Slf4j
 public class RASUtil {
-    public static final String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDA0npULgTlY5RezMAmGLcSaw4dVIZTVuGbSRnai8GHTNTzT4/8yHnIfAhWpwAENEKZWP8iItvQT+KuxpbmpKBEPYIVf2D2wdkr13bFHTgwpICJAjMopNhCmYiKrfbHnpcZJ+rxDfaOpq11cg5LTeGog4PGyPBX47xe+TNU4CPevQIDAQAB";
-    public static final String privateKey = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMDSelQuBOVjlF7MwCYYtxJrDh1UhlNW4ZtJGdqLwYdM1PNPj/zIech8CFanAAQ0QplY/yIi29BP4q7GluakoEQ9ghV/YPbB2SvXdsUdODCkgIkCMyik2EKZiIqt9seelxkn6vEN9o6mrXVyDktN4aiDg8bI8FfjvF75M1TgI969AgMBAAECgYB4njFvnyno5JXXh3VbX3KFzvoRVuKAF4UhQmUt1ObG4EUFvutvUWj9BLmimuzjtF1E1+shS3T9pjtC4W9b7/dgIZY6yco6BWxL7lIYhr89QxJ/0qX+TdAYX9sxbPduSDW2YmsKiNFKOKK1GR4AuATmO5kAOwiIfdyCqZjaXRyNAQJBAPL0ZKNSNOtqPPejThxCUqHiJ/54oNgk7y4UlkvULCK9v+E4wKooVAXul8Z+cvzYznWrBG7JRXpmdtGdECo1/3ECQQDLLPk4i4YRPf4em7IySyRorjJsYBQ6Nti6VhkM1G5GmIobgAbzwVJFJTCsXecEF5MjaFWFyNUs4efRF04j3UYNAkBS6P4TEjHHCNlHdS5pzGRgpEobuFTDjk8lPZdQx1ZMgM6jcHenWd3arGKVNX/OM7q5QyRfHkacj60KuXvTu9uxAkEAloHGTKDuu68UpE/p/V+0pOcF60pxMX6XpdFJ1Ts4RYuSIzT/8WnwK9CU8drN2zYrhTswv146rHjcZQPCmsa7sQJAFGtvZlxCgM0l3Jo2j6XlmY83aKuof6tGLhsNvqSBuz9LR3DFpMvTWl3mjfreYXmOxMaqPr9iTU9gu95mk71XsQ==";
+    public static final String publicKey = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDMIt/Eu8oXDvgmVEOi47TvqSHEjf2y3xw+ZninCFN+G3uPkp1Ve6DEQd1ZXBCBZkgWKQuLFdgrKZj3Oq1yvdbaqYBdcQjoEoYMG8gE4pPNPFUaRy5tVjcVuqyaMzjkUs5GR2RJR7rgYObDnAHWRbTWqLkyMjB0QAy71i/Vqotx/wIDAQAB";
+    public static final String privateKey = "MIICdwIBADANBgkqhkiG9w0BAQEFAASCAmEwggJdAgEAAoGBAMwi38S7yhcO+CZUQ6LjtO+pIcSN/bLfHD5meKcIU34be4+SnVV7oMRB3VlcEIFmSBYpC4sV2CspmPc6rXK91tqpgF1xCOgShgwbyATik808VRpHLm1WNxW6rJozOORSzkZHZElHuuBg5sOcAdZFtNaouTIyMHRADLvWL9Wqi3H/AgMBAAECgYEAir8pWI5KzWFfSK39Srl6QWqziOT5ipoamE8Nsnn2RcBoOy1rwq5ElyAtUo9AqLLcTDOZpO8z/iJH1cIMIfDmFoJcTz1FSTWIY3DbG3HPXgRycoPB5kUVf5Vdyev9KAF3N/HDEl/TW6X++SB986qOcH88zxzvOgLdUGS46cki8AECQQDltlEmK6HAuSc5rR/QxkpmSEFJC6j+1v4ubUcJgBsW+BqDRajt+4MkRpVD5ujPMkpX0xDa5I9maiWHWckeY+UFAkEA439Hu0xRYkA+q08N0qkBnmpTKfj2UvxjElTYn8AHCOYGYZLVHZOevwwj3U5OVWT3o8PXQxN8eGXJbDU64WoqMwJAIF91SD/V5+cwE/zGAxIu4gNE0BqIkoGSCND1te0L5EzKz709dWyAqtgXqR4dqTWZLI9eTLrxSqmi6FRK97F0UQJANORRxB0hSsuPBnsxxomeo7sqrLaCZpbhXdC2MKYPvKTmVOczf1Xj8Z0b9YcQNVBtNvkAYkr0hHV92BekIeZx+wJBAIAKyQC9WcNFyXTOV4wXdjlX80LQmrajNsUNK6L9PZyCHw38N/lB8sDEzQcToZAv86J3ERswLUPsQzgNmnMxIAU=";
     private static final int MAX_ENCRYPT_BLOCK = 117;
     private static final int MAX_DECRYPT_BLOCK = 128;
     //公钥加密
@@ -64,7 +65,8 @@ public class RASUtil {
             PKCS8EncodedKeySpec pkcs8EncodedKeySpec = new PKCS8EncodedKeySpec(rsaPrivateKey);
             KeyFactory keyFactory=KeyFactory.getInstance("RSA");
             PrivateKey privateKey = keyFactory.generatePrivate(pkcs8EncodedKeySpec);
-            Cipher cipher=Cipher.getInstance("RSA");
+            Cipher cipher=Cipher.getInstance("RSA");//java版
+//            Cipher cipher=Cipher.getInstance("RSA/ECB/PKCS1Padding");//android版
             cipher.init(Cipher.DECRYPT_MODE, privateKey);
             byte[] data = Base64.decodeBase64(json);
             int inputLen = data.length;
