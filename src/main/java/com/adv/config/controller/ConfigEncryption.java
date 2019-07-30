@@ -41,7 +41,7 @@ public class ConfigEncryption {
         json.put("id", name);
         json.put("data", result);
         if(result != null){
-            return new ResponseEntity(Response.success(json.toString()), HttpStatus.OK);
+            return new ResponseEntity(Response.success(json), HttpStatus.OK);
         }else{
             return new ResponseEntity(Response.error("Server error"), HttpStatus.INTERNAL_SERVER_ERROR);
         }
